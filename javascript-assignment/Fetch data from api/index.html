@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch </title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>avatar</th>
+            </tr>
+        </thead>
+        <tbody id="tbd"></tbody>
+    </table>
+</body>
+<script>
+    const tbody = document.getElementById('tbd')
+    const url = 'https://reqres.in/api/users?page=1'
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            data.data.map((data) => {
+                const tr  = document.createElement('tr')
+                tr.innerHTML = `
+                    <td>${data.id}</td>
+                    <td>${data.first_name} ${data.lastname}</td>
+                    <td>${data.email}</td>
+                    <td>
+                        <img src=${data.avatar} alt="">
+                    </td>
+            `
+            tbody.appendChild(tr)
+            })
+        })
+</script>
+
+</html>
